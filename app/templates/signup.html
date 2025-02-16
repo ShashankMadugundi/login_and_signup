@@ -1,0 +1,242 @@
+{%extends "base.html"%}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup - Visa2Book</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</body>
+</html> {% endcomment %}
+
+{%load static%}
+
+{%block styles%}
+<link rel="stylesheet" href="{% static "css/signup_styles.css"%}"/>
+{%endblock%}
+
+{%block content%}
+<div class="container">
+    <a href="/" class=".col-md-4 .offset-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="black" class="bi bi-house-fill" viewBox="0 0 16 16">
+        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+      </svg></a>
+    <h2>Create Account</h2>
+    {% comment %} <div class="social-icons">
+        <a href=""><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 47 47">
+            <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path><path fill="#fff" d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z"></path>
+            </svg></a>
+            {% load socialaccount %}
+        <a href="{% provider_login_url 'google' %}"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+            <path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1565c0" d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+            </svg></a>
+    </div> {% endcomment %}
+    {% comment %} <p>or use your email for registration</p> {% endcomment %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.full_name }}
+            {% if form.full_name.errors %}
+                <div class="error">{{ form.full_name.errors.0 }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error">{{ form.email.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group d-flex align-items-center">
+            <select name="country_code" id="country_code" class="form-control" style="width: 80px;  max-width: 120px; padding-left:3px; padding-right:3px; height:49px;">
+                <option value="+1" {% if form.country_code.value == '+1' %}selected{% endif %}>+1 (USA)</option>
+<option value="+91" {% if form.country_code.value == '+91' %}selected{% endif %}>+91 (IND)</option>
+<option value="+44" {% if form.country_code.value == '+44' %}selected{% endif %}>+44 (GBR)</option>
+<option value="+61" {% if form.country_code.value == '+61' %}selected{% endif %}>+61 (AUS)</option>
+<option value="+81" {% if form.country_code.value == '+81' %}selected{% endif %}>+81 (JPN)</option>
+<option value="+49" {% if form.country_code.value == '+49' %}selected{% endif %}>+49 (DEU)</option>
+<option value="+33" {% if form.country_code.value == '+33' %}selected{% endif %}>+33 (FRA)</option>
+<option value="+55" {% if form.country_code.value == '+55' %}selected{% endif %}>+55 (BRA)</option>
+<option value="+86" {% if form.country_code.value == '+86' %}selected{% endif %}>+86 (CHN)</option>
+<option value="+7" {% if form.country_code.value == '+7' %}selected{% endif %}>+7 (RUS)</option>
+<option value="+93" {% if form.country_code.value == '+93' %}selected{% endif %}>+93 (AFG)</option>
+<option value="+355" {% if form.country_code.value == '+355' %}selected{% endif %}>+355 (ALB)</option>
+<option value="+213" {% if form.country_code.value == '+213' %}selected{% endif %}>+213 (DZA)</option>
+<option value="+376" {% if form.country_code.value == '+376' %}selected{% endif %}>+376 (AND)</option>
+<option value="+244" {% if form.country_code.value == '+244' %}selected{% endif %}>+244 (AGO)</option>
+<option value="+54" {% if form.country_code.value == '+54' %}selected{% endif %}>+54 (ARG)</option>
+<option value="+374" {% if form.country_code.value == '+374' %}selected{% endif %}>+374 (ARM)</option>
+<option value="+43" {% if form.country_code.value == '+43' %}selected{% endif %}>+43 (AUT)</option>
+<option value="+994" {% if form.country_code.value == '+994' %}selected{% endif %}>+994 (AZE)</option>
+<option value="+973" {% if form.country_code.value == '+973' %}selected{% endif %}>+973 (BHR)</option>
+<option value="+880" {% if form.country_code.value == '+880' %}selected{% endif %}>+880 (BGD)</option>
+<option value="+375" {% if form.country_code.value == '+375' %}selected{% endif %}>+375 (BLR)</option>
+<option value="+32" {% if form.country_code.value == '+32' %}selected{% endif %}>+32 (BEL)</option>
+<option value="+501" {% if form.country_code.value == '+501' %}selected{% endif %}>+501 (BLZ)</option>
+<option value="+229" {% if form.country_code.value == '+229' %}selected{% endif %}>+229 (BEN)</option>
+<option value="+975" {% if form.country_code.value == '+975' %}selected{% endif %}>+975 (BTN)</option>
+<option value="+591" {% if form.country_code.value == '+591' %}selected{% endif %}>+591 (BOL)</option>
+<option value="+387" {% if form.country_code.value == '+387' %}selected{% endif %}>+387 (BIH)</option>
+<option value="+267" {% if form.country_code.value == '+267' %}selected{% endif %}>+267 (BWA)</option>
+<option value="+673" {% if form.country_code.value == '+673' %}selected{% endif %}>+673 (BRN)</option>
+<option value="+359" {% if form.country_code.value == '+359' %}selected{% endif %}>+359 (BGR)</option>
+<option value="+226" {% if form.country_code.value == '+226' %}selected{% endif %}>+226 (BFA)</option>
+<option value="+855" {% if form.country_code.value == '+855' %}selected{% endif %}>+855 (KHM)</option>
+<option value="+237" {% if form.country_code.value == '+237' %}selected{% endif %}>+237 (CMR)</option>
+<option value="+1" {% if form.country_code.value == '+1' %}selected{% endif %}>+1 (CAN)</option>
+<option value="+56" {% if form.country_code.value == '+56' %}selected{% endif %}>+56 (CHL)</option>
+<option value="+57" {% if form.country_code.value == '+57' %}selected{% endif %}>+57 (COL)</option>
+<option value="+506" {% if form.country_code.value == '+506' %}selected{% endif %}>+506 (CRI)</option>
+<option value="+385" {% if form.country_code.value == '+385' %}selected{% endif %}>+385 (HRV)</option>
+<option value="+357" {% if form.country_code.value == '+357' %}selected{% endif %}>+357 (CYP)</option>
+<option value="+420" {% if form.country_code.value == '+420' %}selected{% endif %}>+420 (CZE)</option>
+<option value="+45" {% if form.country_code.value == '+45' %}selected{% endif %}>+45 (DNK)</option>
+<option value="+253" {% if form.country_code.value == '+253' %}selected{% endif %}>+253 (DJI)</option>
+<option value="+593" {% if form.country_code.value == '+593' %}selected{% endif %}>+593 (ECU)</option>
+<option value="+20" {% if form.country_code.value == '+20' %}selected{% endif %}>+20 (EGY)</option>
+<option value="+503" {% if form.country_code.value == '+503' %}selected{% endif %}>+503 (SLV)</option>
+<option value="+372" {% if form.country_code.value == '+372' %}selected{% endif %}>+372 (EST)</option>
+<option value="+251" {% if form.country_code.value == '+251' %}selected{% endif %}>+251 (ETH)</option>
+<option value="+358" {% if form.country_code.value == '+358' %}selected{% endif %}>+358 (FIN)</option>
+<option value="+995" {% if form.country_code.value == '+995' %}selected{% endif %}>+995 (GEO)</option>
+<option value="+30" {% if form.country_code.value == '+30' %}selected{% endif %}>+30 (GRC)</option>
+<option value="+502" {% if form.country_code.value == '+502' %}selected{% endif %}>+502 (GTM)</option>
+<option value="+224" {% if form.country_code.value == '+224' %}selected{% endif %}>+224 (GIN)</option>
+<option value="+592" {% if form.country_code.value == '+592' %}selected{% endif %}>+592 (GUY)</option>
+<option value="+509" {% if form.country_code.value == '+509' %}selected{% endif %}>+509 (HTI)</option>
+<option value="+504" {% if form.country_code.value == '+504' %}selected{% endif %}>+504 (HND)</option>
+<option value="+36" {% if form.country_code.value == '+36' %}selected{% endif %}>+36 (HUN)</option>
+<option value="+354" {% if form.country_code.value == '+354' %}selected{% endif %}>+354 (ISL)</option>
+<option value="+98" {% if form.country_code.value == '+98' %}selected{% endif %}>+98 (IRN)</option>
+<option value="+964" {% if form.country_code.value == '+964' %}selected{% endif %}>+964 (IRQ)</option>
+<option value="+353" {% if form.country_code.value == '+353' %}selected{% endif %}>+353 (IRL)</option>
+<option value="+972" {% if form.country_code.value == '+972' %}selected{% endif %}>+972 (ISR)</option>
+<option value="+39" {% if form.country_code.value == '+39' %}selected{% endif %}>+39 (ITA)</option>
+<option value="+81" {% if form.country_code.value == '+81' %}selected{% endif %}>+81 (JPN)</option>
+<option value="+962" {% if form.country_code.value == '+962' %}selected{% endif %}>+962 (JOR)</option>
+<option value="+254" {% if form.country_code.value == '+254' %}selected{% endif %}>+254 (KEN)</option>
+<option value="+82" {% if form.country_code.value == '+82' %}selected{% endif %}>+82 (KOR)</option>
+<option value="+965" {% if form.country_code.value == '+965' %}selected{% endif %}>+965 (KWT)</option>
+<option value="+996" {% if form.country_code.value == '+996' %}selected{% endif %}>+996 (KGZ)</option>
+<option value="+856" {% if form.country_code.value == '+856' %}selected{% endif %}>+856 (LAO)</option>
+<option value="+371" {% if form.country_code.value == '+371' %}selected{% endif %}>+371 (LVA)</option>
+<option value="+961" {% if form.country_code.value == '+961' %}selected{% endif %}>+961 (LBN)</option>
+<option value="+266" {% if form.country_code.value == '+266' %}selected{% endif %}>+266 (LSO)</option>
+<option value="+231" {% if form.country_code.value == '+231' %}selected{% endif %}>+231 (LBR)</option>
+<option value="+218" {% if form.country_code.value == '+218' %}selected{% endif %}>+218 (LBY)</option>
+<option value="+423" {% if form.country_code.value == '+423' %}selected{% endif %}>+423 (LIE)</option>
+<option value="+370" {% if form.country_code.value == '+370' %}selected{% endif %}>+370 (LTU)</option>
+<option value="+352" {% if form.country_code.value == '+352' %}selected{% endif %}>+352 (LUX)</option>
+<option value="+853" {% if form.country_code.value == '+853' %}selected{% endif %}>+853 (MAC)</option>
+<option value="+389" {% if form.country_code.value == '+389' %}selected{% endif %}>+389 (MKD)</option>
+<option value="+261" {% if form.country_code.value == '+261' %}selected{% endif %}>+261 (MDG)</option>
+<option value="+265" {% if form.country_code.value == '+265' %}selected{% endif %}>+265 (MWI)</option>
+<option value="+60" {% if form.country_code.value == '+60' %}selected{% endif %}>+60 (MYS)</option>
+<option value="+258" {% if form.country_code.value == '+258' %}selected{% endif %}>+258 (MOZ)</option>
+<option value="+264" {% if form.country_code.value == '+264' %}selected{% endif %}>+264 (NAM)</option>
+<option value="+674" {% if form.country_code.value == '+674' %}selected{% endif %}>+674 (NRU)</option>
+<option value="+977" {% if form.country_code.value == '+977' %}selected{% endif %}>+977 (NPL)</option>
+<option value="+31" {% if form.country_code.value == '+31' %}selected{% endif %}>+31 (NLD)</option>
+<option value="+599" {% if form.country_code.value == '+599' %}selected{% endif %}>+599 (ABW)</option>
+<option value="+687" {% if form.country_code.value == '+687' %}selected{% endif %}>+687 (NCL)</option>
+<option value="+64" {% if form.country_code.value == '+64' %}selected{% endif %}>+64 (NZL)</option>
+<option value="+850" {% if form.country_code.value == '+850' %}selected{% endif %}>+850 (PRK)</option>
+<option value="+47" {% if form.country_code.value == '+47' %}selected{% endif %}>+47 (NOR)</option>
+<option value="+968" {% if form.country_code.value == '+968' %}selected{% endif %}>+968 (OMN)</option>
+<option value="+92" {% if form.country_code.value == '+92' %}selected{% endif %}>+92 (PAK)</option>
+<option value="+680" {% if form.country_code.value == '+680' %}selected{% endif %}>+680 (PLW)</option>
+<option value="+970" {% if form.country_code.value == '+970' %}selected{% endif %}>+970 (PSE)</option>
+<option value="+507" {% if form.country_code.value == '+507' %}selected{% endif %}>+507 (PAN)</option>
+<option value="+675" {% if form.country_code.value == '+675' %}selected{% endif %}>+675 (PNG)</option>
+<option value="+595" {% if form.country_code.value == '+595' %}selected{% endif %}>+595 (PRY)</option>
+<option value="+51" {% if form.country_code.value == '+51' %}selected{% endif %}>+51 (PER)</option>
+<option value="+63" {% if form.country_code.value == '+63' %}selected{% endif %}>+63 (PHL)</option>
+<option value="+48" {% if form.country_code.value == '+48' %}selected{% endif %}>+48 (POL)</option>
+<option value="+351" {% if form.country_code.value == '+351' %}selected{% endif %}>+351 (PRT)</option>
+<option value="+1787" {% if form.country_code.value == '+1787' %}selected{% endif %}>+1787 (PRI)</option>
+<option value="+590" {% if form.country_code.value == '+590' %}selected{% endif %}>+590 (GLP)</option>
+<option value="+595" {% if form.country_code.value == '+595' %}selected{% endif %}>+595 (PRY)</option>
+<option value="+974" {% if form.country_code.value == '+974' %}selected{% endif %}>+974 (QAT)</option>
+<option value="+40" {% if form.country_code.value == '+40' %}selected{% endif %}>+40 (ROU)</option>
+<option value="+7" {% if form.country_code.value == '+7' %}selected{% endif %}>+7 (RUS)</option>
+<option value="+250" {% if form.country_code.value == '+250' %}selected{% endif %}>+250 (RWA)</option>
+<option value="+590" {% if form.country_code.value == '+590' %}selected{% endif %}>+590 (GLP)</option>
+<option value="+378" {% if form.country_code.value == '+378' %}selected{% endif %}>+378 (SMR)</option>
+<option value="+239" {% if form.country_code.value == '+239' %}selected{% endif %}>+239 (STP)</option>
+<option value="+221" {% if form.country_code.value == '+221' %}selected{% endif %}>+221 (SEN)</option>
+<option value="+248" {% if form.country_code.value == '+248' %}selected{% endif %}>+248 (SYC)</option>
+<option value="+232" {% if form.country_code.value == '+232' %}selected{% endif %}>+232 (SLE)</option>
+<option value="+65" {% if form.country_code.value == '+65' %}selected{% endif %}>+65 (SGP)</option>
+<option value="+421" {% if form.country_code.value == '+421' %}selected{% endif %}>+421 (SVK)</option>
+<option value="+386" {% if form.country_code.value == '+386' %}selected{% endif %}>+386 (SVN)</option>
+<option value="+963" {% if form.country_code.value == '+963' %}selected{% endif %}>+963 (SYR)</option>
+<option value="+268" {% if form.country_code.value == '+268' %}selected{% endif %}>+268 (SWZ)</option>
+<option value="+886" {% if form.country_code.value == '+886' %}selected{% endif %}>+886 (TWN)</option>
+<option value="+992" {% if form.country_code.value == '+992' %}selected{% endif %}>+992 (TJK)</option>
+<option value="+255" {% if form.country_code.value == '+255' %}selected{% endif %}>+255 (TZA)</option>
+<option value="+66" {% if form.country_code.value == '+66' %}selected{% endif %}>+66 (THA)</option>
+<option value="+670" {% if form.country_code.value == '+670' %}selected{% endif %}>+670 (TLS)</option>
+<option value="+228" {% if form.country_code.value == '+228' %}selected{% endif %}>+228 (TGO)</option>
+<option value="+216" {% if form.country_code.value == '+216' %}selected{% endif %}>+216 (TUN)</option>
+<option value="+90" {% if form.country_code.value == '+90' %}selected{% endif %}>+90 (TUR)</option>
+<option value="+993" {% if form.country_code.value == '+993' %}selected{% endif %}>+993 (TKM)</option>
+<option value="+1" {% if form.country_code.value == '+1' %}selected{% endif %}>+1 (USA)</option>
+<option value="+256" {% if form.country_code.value == '+256' %}selected{% endif %}>+256 (UGA)</option>
+<option value="+380" {% if form.country_code.value == '+380' %}selected{% endif %}>+380 (UKR)</option>
+<option value="+44" {% if form.country_code.value == '+44' %}selected{% endif %}>+44 (GBR)</option>
+<option value="+1" {% if form.country_code.value == '+1' %}selected{% endif %}>+1 (USA)</option>
+
+                <!-- Add more country codes as needed -->
+            </select>
+            {{ form.mobile_number }}
+            {% if form.mobile_number.errors %}
+                <div class="error">{{ form.mobile_number.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="error">{{ form.password.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.confirm_password }}
+            {% if form.confirm_password.errors %}
+                <div class="error">{{ form.confirm_password.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="error" id="error-msg">{{ form.non_field_errors.0 }}</div>
+
+        <div class="form-check d-flex align-items-center">
+            <input class="form-check-input me-1" style="border: 2px solid black; " type="checkbox" id="exampleCheckbox" required>
+            <label class="form-check-label" style="margin-left:8px" for="exampleCheckbox">
+              I agree <a href="/terms_and_conditions">Terms and Conditions</a>
+            </label>
+          </div>
+          
+          
+        <button type="submit">Sign Up</button>
+        <p class="text-center mt-3">
+            Already have an account? <a href="{% url 'login' %}">Log In</a>
+        </p>
+    </form>
+</div>
+{%endblock%}

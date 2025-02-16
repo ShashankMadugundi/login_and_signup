@@ -1,0 +1,78 @@
+{% comment %} <html>
+<head>
+    <title>Verify OTP</title>
+</head>
+<body>
+    <h2>Verify OTP</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+ {% endcomment %}
+
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-white">
+    <div class="text-center">
+        <div class="flex justify-center mb-6">
+            <img alt="Illustration of a mobile phone with an envelope icon" class="w-24 h-24"
+                 src="https://storage.googleapis.com/a1aa/image/gyAurEHLeqTKbOWXH67HpLiakPBKLSs-8V96GpFqhiU.jpg"/>
+        </div>
+        <h1 class="text-2xl font-semibold mb-2">Verification</h1>
+        <p class="text-gray-500 mb-6">
+            You will get an OTP via
+            <span class="text-purple-500">SMS</span>
+        </p>
+        {% comment %} <div class="error" id="error-msg">{{err}}</div> {% endcomment %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="signup" value="1">  <!-- Hidden field to retain signup -->
+            <input class="w-full max-w-xs mx-auto mb-4 p-3 border border-gray-300 rounded-lg text-center" type="text" name="otp" placeholder="Enter OTP" required>
+            <button class="w-full py-3 mb-4 text-white bg-purple-500 rounded-lg">
+                VERIFY
+            </button>
+            {% if messages %}
+            {% for message in messages %}
+                <p class="text-red-500">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        </form>
+        
+
+        <p class="text-gray-500">
+            Didn't receive the verification OTP?
+            <a id="resendOtpLink" class="text-purple-500 cursor-pointer">Resend OTP</a>
+        </p>
+    </div>
+</body>
+<script>
+    document.getElementById("resendOtpLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        
+        fetch("{% url 'resend_otp' %}", {  // URL to resend OTP
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);  // Show message to user
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+</html>

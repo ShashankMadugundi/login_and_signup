@@ -1,0 +1,142 @@
+{%load static%}
+<footer class="bg-blue-900 text-white pt-8 pb-1">
+    <div class="container mx-auto px-4">
+     <div class="flex flex-wrap justify-center md:justify-between text-center md:text-left">
+      <div class="w-full md:w-1/5 mb-6 md:mb-0">
+       <h2 class="font-bold text-lg mb-4">
+        Company Information
+       </h2>
+       <ul>
+        <li class="mb-2">
+         <a class="hover:underline" href="/about_us">
+          About Us
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="/contact_us">
+          Contact Us
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="/privacy_policy">
+          Privacy Policy
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="/terms_and_conditions">
+          Terms &amp; Conditions
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="w-full md:w-1/5 mb-6 md:mb-0">
+       <h2 class="font-bold text-lg mb-4">
+        Quick Links
+       </h2>
+       <ul>
+        <li class="mb-2">
+         <a class="hover:underline" href="/refund_policy">
+          Refund Policy
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="/faq">
+          FAQs
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="/customer_support">
+          Customer Support
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="w-full md:w-1/5 mb-6 md:mb-0">
+       <h2 class="font-bold text-lg mb-4">
+        Payment Methods
+       </h2>
+       <ul class="flex justify-center md:justify-start space-x-4">
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="Visa icon" height="32" src="{%static 'icons/visa.png'%}" width="32"/>
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="Mastercard icon" height="32" src="{%static 'icons/mastercard.png'%}" width="32"/>
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="UPI icon" height="32" src="{%static 'icons/bhim.png'%}" width="32"/>
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="Google Pay" height="32" src="{%static 'icons/googlepay.png'%}" width="32"/>
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="Paytm icon" height="32" src="{%static 'icons/paytm.png'%}" width="32"/>
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          <img alt="Phonepe icon" height="32" src="{%static 'icons/phonepe.png'%}" width="32"/>
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="w-full md:w-1/5 mb-6 md:mb-0">
+       <h2 class="font-bold text-lg mb-4">
+        Customer Support
+       </h2>
+       <ul>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          Phone: 123-456-7890
+         </a>
+        </li>
+        <li class="mb-2">
+         <a class="hover:underline" href="#">
+          Email: support@example.com
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="flex flex-col md:flex-row justify-center md:justify-between items-center mt-4 text-center md:text-left">
+        <div class="flex flex-col gap-4 md:flex-row mt-4 text-sm md:text-left">
+            <a class="hover:underline" href="#">
+                <img class="mx-3" alt="Paytm icon" height="32" src="{%static 'icons/playstore.png'%}" width="32"/>Playstore
+               </a>
+            <a class="hover:underline" href="#">
+                <img class="mx-3"  alt="Paytm icon" height="32" src="{%static 'icons/apple.png'%}" width="32"/>App Store
+               </a>
+         </div>
+      <div class="flex space-x-4">
+       <a class="hover:text-gray-400" href="#">
+        <i class="fab fa-facebook-f">
+        </i>
+       </a>
+       <a class="hover:text-gray-400" href="#">
+        <i class="fab fa-twitter">
+        </i>
+       </a>
+       <a class="hover:text-gray-400" href="#">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a class="hover:text-gray-400" href="#">
+        <i class="fab fa-linkedin-in">
+        </i>
+       </a>
+      </div>
+     </div>
+     <p id="year-text" class="text-center mx-auto"></p>
+    </div>
+   </footer>
+   <script>
+    document.getElementById('year-text').innerHTML=`Copyright © ${new Date().getFullYear()} Visa2Book. All rights reserved`
+   </script>

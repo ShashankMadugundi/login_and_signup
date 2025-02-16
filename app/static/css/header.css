@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007BFF;
+    color: white;
+    padding: 15px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    background: white;
+    color: #007BFF;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.menu {
+    display: none;
+    background: #007BFF;
+    padding: 10px;
+}
+
+.menu.active {
+    display: block;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu ul li {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu ul li:hover .dropdown {
+    display: block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    color: black;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown li {
+    padding: 8px;
+}
+
+.dropdown li:hover {
+    background: lightgray;
+}
+ 
+  

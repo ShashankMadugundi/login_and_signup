@@ -1,0 +1,80 @@
+{% comment %} <html>
+<head>
+    <title>Login with OTP</title>
+</head>
+<body>
+    <h2>Login with OTP</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="phone" placeholder="Enter Mobile Number" required>
+        <button type="submit">Send OTP</button>
+    </form>
+</body>
+</html>
+
+ {% endcomment %}
+
+
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Verification
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+ </head>
+ <body class="flex items-center justify-center min-h-screen bg-white">
+  <div class="text-center">
+   <img alt="Phone with a paper plane icon" class="mx-auto mb-6" height="100" src="https://storage.googleapis.com/a1aa/image/vkUcqgkWuvJzVZbZe9ntyaiE8emhMOjPJCokdmuX4FI.jpg" width="100"/>
+   <h1 class="text-2xl font-bold text-gray-800 mb-2">
+    Verification
+   </h1>
+   <p class="text-gray-500 mb-8">
+    We will send you a
+    <span class="font-semibold text-gray-700">
+     One Time Password
+    </span>
+    on your phone number
+   </p>
+   <form method="post">
+    {% csrf_token %}
+   <input id="phone" class="w-full max-w-xs mx-auto mb-4 p-3 border border-gray-300 rounded-lg text-center" placeholder="Enter Phone Number" name="phone" type="text"/>
+   <button class="w-full max-w-xs mx-auto p-3 bg-purple-600 text-white font-semibold rounded-lg">
+    GET OTP
+   </button>
+   {% if messages %}
+    {% for message in messages %}
+        <p class="text-red-500">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+</form>
+
+  </div>
+ </body>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let phoneInput = document.getElementById("phone");
+        
+        // Set default +91 when the page loads
+        phoneInput.value = "+91";
+
+        phoneInput.addEventListener("input", function (event) {
+            // Prevent the user from deleting "+91"
+            if (!phoneInput.value.startsWith("+91")) {
+                phoneInput.value = "+91";
+            }
+        });
+
+        phoneInput.addEventListener("keydown", function (event) {
+            // Prevent backspace or delete from removing "+91"
+            if ((event.key === "Backspace" || event.key === "Delete") && phoneInput.selectionStart <= 3) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+</html>
